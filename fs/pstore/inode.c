@@ -36,7 +36,11 @@
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/uaccess.h>
+#include <linux/syslog.h>
 #include <linux/vmalloc.h>
+#ifdef CONFIG_PSTORE_LAST_KMSG
+#include <linux/proc_fs.h>
+#endif
 
 #include "internal.h"
 
