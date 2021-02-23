@@ -6526,7 +6526,7 @@ boosted_cpu_util(int cpu)
 	unsigned long util = cpu_util_freq(cpu);
 	long margin = schedtune_cpu_margin(util, cpu);
 
-	trace_sched_boost_cpu(cpu, util, margin);
+//	trace_sched_boost_cpu(cpu, util, margin);
 
 	return util + margin;
 }
@@ -6537,7 +6537,7 @@ boosted_task_util(struct task_struct *p)
 	unsigned long util = task_util_est(p);
 	long margin = schedtune_task_margin(p);
 
-	trace_sched_boost_task(task, util, margin);
+//	trace_sched_boost_task(task, util, margin);
 
 	return util + margin;
 }
@@ -7179,9 +7179,9 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 		? best_active_cpu
 		: best_idle_cpu;
 
-	trace_sched_find_best_target(p, prefer_idle, min_util, cpu,
-				     best_idle_cpu, best_active_cpu,
-				     target_cpu);
+//	trace_sched_find_best_target(p, prefer_idle, min_util, cpu,
+//				     best_idle_cpu, best_active_cpu,
+//				     target_cpu);
 
 	schedstat_inc(p, se.statistics.nr_wakeups_fbt_count);
 	schedstat_inc(this_rq(), eas_stats.fbt_count);
