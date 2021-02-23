@@ -10,10 +10,10 @@
 KERNEL_DIR=$PWD
 KERN_IMG=$KERNEL_DIR/out/arch/arm64/boot/Image.gz-dtb
 ZIP_DIR=$KERNEL_DIR/../anykernel
-CONFIG=dxt_defconfig
-CROSS_COMPILE="aarch64-linux-gnu-"
-CROSS_COMPILE_ARM32="arm-linux-gnueabi-"
-PATH="${KERNEL_DIR}/../clang/bin:${KERNEL_DIR}/../clang/aarch64-linux-gnu/bin:${KERNEL_DIR}/../clang/aarch64-linux-gnu/bin:${PATH}"
+CONFIG=cybertron_defconfig
+CROSS_COMPILE="aarch64-linux-android-"
+CROSS_COMPILE_ARM32="arm-linux-androideabi-"
+PATH="${KERNEL_DIR}/../cl10/bin:${KERNEL_DIR}/../aarch64-linux-android-4.9/bin:${KERNEL_DIR}/../arm-linux-androideabi-4.9/bin:${PATH}"
 
 # Export
 export ARCH=arm64
@@ -25,7 +25,8 @@ make O=out $CONFIG
 make -j$(nproc --all) O=out \
                       ARCH=arm64 \
                       CC=clang \
-CROSS_COMPILE=aarch64-linux-gnu-
+CLANG_TRIPLE=aarch64-linux-gnu- \
+CROSS_COMPILE=aarch64-linux-android-
 
 if ! [ -a $KERN_IMG ]; then
     echo "Build error!"
@@ -38,8 +39,8 @@ cd ..
 cd $ZIP_DIR
 cp $KERN_IMG zImage
 make normal &>/dev/null
-rm -rf DxT-v3.2.zip
-zip -r9 DxT-v3.2.zip * -x .git README.md *placeholder
+rm -rf cybertron.zip
+zip -r9 cybertron.zip * -x .git README.md *placeholder
 echo "Flashable zip generated under $ZIP_DIR."
 cd ..
 # Build end
